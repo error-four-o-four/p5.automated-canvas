@@ -31,8 +31,9 @@
 		this._setProperty('_loop', !state);
 	};
 
-	// p5.prototype.toggleFullscreen = function() {
 	/**@todo */
+	// p5.prototype.toggleFullscreen = function() {
+	// https://editor.p5js.org/SableRaf/sketches/qJrZmsQmU
 	// }
 
 
