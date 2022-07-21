@@ -1,5 +1,4 @@
 (function addP5Utils() {
-	// https://github.com/processing/p5.js/blob/66a386b1c406f69952eb78d7684019bcb424c70a/src/core/main.js
 
 	p5.RendererGL.prototype._initContext = function () {
 		try {
@@ -22,6 +21,9 @@
 			throw er;
 		}
 	};
+
+	/* https://github.com/processing/p5.js/blob/66a386b1c406f69952eb78d7684019bcb424c70a/src/core/main.js
+	/* custom *//////////////////////////////////////////////////////////////////////////////////////////
 
 	p5.prototype.toggleLoop = function () {
 		const state = this.isLooping();
@@ -48,6 +50,7 @@
 			centered: false,
 			renderer: undefined,
 
+			doResize: true,
 			debouncedResizeDelay: 600,
 		};
 
@@ -65,9 +68,10 @@
 				...args[0]
 			});
 
-			// console.log(ctx._settings);
-
 			const [w, h] = getDimensions(ctx);
+
+			ctx._setProperty('widthHalf', 0.5 * w);
+			ctx._setProperty('heightHalf', 0.48125 * h);
 
 			return fn.call(this, w, h, ctx._settings.renderer);
 		};
@@ -84,55 +88,68 @@
 	/* Overwrite resize event */////////////////////////////////////////////////////////////////////////////////
 
 	p5.prototype.registerMethod('init', function () {
-		const ctx = (this._isGlobal) ? window : this;
-
 		let loop;
 
 		this._onresize = null; // don't allow p5 to attach the default resize event
 
-		addTriggerResizeEvent(ctx);
-		addDebouncedResizeEvent(ctx);
+		addTriggerResizeEvent.call(this);
+		addDebouncedResizeEvent.call(this);
 
-		function addTriggerResizeEvent(p) {
-			window.addEventListener('resize', triggerResize.bind(p), { once: true });
+		// this === p5.prototype
+		function addTriggerResizeEvent() {
+			window.addEventListener('resize', triggerResize.bind(this), { once: true });
 		}
 
-		function triggerResize() {
-			loop = this.isLooping();
-			loop && this.noLoop();
+		function triggerResize(e) {
+			const ctx = (this._isGlobal) ? window : this;
+
+			// not sure about the order: 1. callback 2.set noLoop/properties
+
+			let executeDefault;
+			if (typeof ctx.windowResizeTriggered === 'function') {
+				executeDefault = ctx.windowResizeTriggered(e);
+				if (executeDefault !== undefined && !executeDefault) {
+					e.preventDefault();
+				}
+			}
+
+			loop = ctx.isLooping();
+			loop && ctx.noLoop();
+
+			if (this._settings.doResize) {
+				// console.log(this.canvas.style);
+			}
 		}
 
-		function addDebouncedResizeEvent(p) {
-			window.addEventListener('resize', debounce(finishResize.bind(p), p._settings.debouncedResizeDelay));
+		function addDebouncedResizeEvent() {
+			window.addEventListener('resize', debounce(finishResize.bind(this), this._settings.debouncedResizeDelay));
 		}
 
 		function finishResize(e) {
+			const ctx = (this._isGlobal) ? window : this;
+
 			this._setProperty('windowWidth', getWindowWidth());
 			this._setProperty('windowHeight', getWindowHeight());
 
 			let wPrev = ctx.width;
 			let hPrev = ctx.height;
-			let [w, h] = getDimensions(this);
+			let [w, h] = getDimensions(ctx);
 			let wr = w / wPrev;
 			let hr = h / hPrev;
 
-			this.resizeCanvas(w, h);
+			if (ctx._settings.doResize) {
+				ctx.resizeCanvas(w, h);
+				ctx._setProperty('widthHalf', 0.5 * w);
+				ctx._setProperty('heightHalf', 0.48125 * h);
+			}
 
-			/**@improve */
-			if (this._settings.type === types[0]) {
-				this._setProperty('resizeRatio', null);
-				this._setProperty('resizeRatioX', wr);
-				this._setProperty('resizeRatioY', hr);
-			}
-			else {
-				this._setProperty('resizeRatio', wr);
-				this._setProperty('resizeRatioX', null);
-				this._setProperty('resizeRatioY', null);
-			}
+			this._setProperty('resizeRatio', wr);
+			this._setProperty('resizeRatioX', wr);
+			this._setProperty('resizeRatioY', hr);
 
 			let executeDefault;
-			if (typeof this.windowResized === 'function') {
-				executeDefault = this.windowResized(e);
+			if (typeof ctx.windowResized === 'function') {
+				executeDefault = ctx.windowResized(e);
 				if (executeDefault !== undefined && !executeDefault) {
 					e.preventDefault();
 				}
@@ -140,7 +157,7 @@
 
 			loop && this.loop();
 
-			addTriggerResizeEvent(this);
+			addTriggerResizeEvent.call(this);
 		}
 
 		function debounce(func, wait) {
@@ -173,9 +190,6 @@
 			/**@todo instance mode */
 
 		}
-
-		ctx._setProperty('widthHalf', 0.5 * w);
-		ctx._setProperty('heightHalf', 0.48125 * h);
 
 		return [w, h];
 	}
