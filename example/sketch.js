@@ -1,3 +1,5 @@
+import { easeCubicInOut } from '../dist/esm/index.js';
+
 let radius = 30;
 
 let x = 100;
@@ -31,18 +33,18 @@ window.windowResizeFinished = () => {
 ////////////////////////////////////////////////////// DRAW
 
 window.draw = () => {
-	const t = (frameCount % 600) / 600;
+	const t = easeCubicInOut((frameCount % 600) / 600);
 	background(360 * t, 100, 50);
 
 	ellipse(x, y, radius);
 
 	if (isWindowResizing()) {
 		background(0);
-		push()
+		push();
 		fill(255);
-		textAlign(CENTER, CENTER)
-		text('Rescaling ...', 0, 0)
-		pop()
+		textAlign(CENTER, CENTER);
+		text('Rescaling ...', 0, 0);
+		pop();
 	}
 };
 
