@@ -8,7 +8,7 @@ const input = ["src/index.js"];
 
 export default [
 	{
-		// UMD
+		// UMD minified
 		input,
 		plugins: [
 			nodeResolve(),
@@ -20,7 +20,7 @@ export default [
 		output: {
 			file: `dist/${pkg.name}.min.js`,
 			format: "umd",
-			name: "Utils", // this is the name of the global object
+			name: "u5",
 			esModule: false,
 			exports: "named",
 			sourcemap: true,

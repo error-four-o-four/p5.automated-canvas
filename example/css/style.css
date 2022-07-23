@@ -1,22 +1,33 @@
-html {
-	background-color: #000;
-}
+/* html {
+	background-color: hsl(0, 0%, 4%);
+} */
 
 body {
+	background-color: hsl(0, 0%, 4%);
 	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 	line-height: 1.2;
 	color: hsl(0, 0%, 70%);
+
+	margin: 0;
+	padding: 0;
+	/* overflow: hidden; */
 }
 
-main#canvas-wrap {
+body,
+main,
+canvas {
 	position: relative;
+	touch-action: none;
+	user-select: none;
+}
+
+main {
 	width: 100%;
 	height: 100vh;
+	/* height: 98.75vh; */
 
 	display: flex;
 	justify-content: center;
 	align-items: center;
-}
-main#canvas-wrap canvas {
-	position: relative;
+	overflow: hidden;
 }

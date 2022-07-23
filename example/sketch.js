@@ -1,5 +1,8 @@
 let radius = 30;
 
+let x = 100;
+let y = -200;
+
 ////////////////////////////////////////////////////// SETUP
 
 window.setup = () => {
@@ -14,12 +17,15 @@ window.setup = () => {
 
 window.windowResizeTriggered = () => {
 	console.log('triggered');
+	redraw();
 };
 
-window.windowResized = () => {
+window.windowResizeFinished = () => {
+	x *= resizeRatioX;
+	y *= resizeRatioY;
 	radius *= resizeRatio;
 
-	console.log('finished');
+	console.log(x, y, radius);
 };
 
 ////////////////////////////////////////////////////// DRAW
@@ -28,12 +34,23 @@ window.draw = () => {
 	const t = (frameCount % 600) / 600;
 	background(360 * t, 100, 50);
 
-	ellipse(0, 0, radius);
+	ellipse(x, y, radius);
+
+	if (isWindowResizing()) {
+		background(0);
+		push()
+		fill(255);
+		textAlign(CENTER, CENTER)
+		text('Rescaling ...', 0, 0)
+		pop()
+	}
 };
 
 window.mouseReleased = () => {
-	toggleLoop();
+	console.log('looping: ' + toggleLoop());
+};
 
-	console.log('looping: ' + isLooping());
-}
+window.keyReleased = (e) => {
+	if (e.code === 'KeyF') console.log('fullscreen: ' + toggleFullscreen());
+};
 
