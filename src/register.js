@@ -1,23 +1,27 @@
-import { centerOrigin, overwriteCreateCanvas } from './rendering.js';
+import { centerOrigin } from './rendering.js';
 import { attachResizeEvents } from './environment.js';
 import { removeLibrary } from './remove.js';
 
-function oninit() {
-	// this === p5.prototype
-	overwriteCreateCanvas.call(this);
+const methods = {
+	init,
+	pre,
+	remove
+}
+
+export default function(p5) {
+	for (const key of Object.keys(methods)) {
+		p5.prototype.registerMethod(key, methods[key]);
+	}
+}
+
+function init() {
 	attachResizeEvents.call(this);
 }
 
-function onpre() {
+function pre() {
 	centerOrigin.call(this);
 }
 
-function onremove() {
+function remove() {
 	removeLibrary.call(this);
-}
-
-export default {
-	oninit,
-	onpre,
-	onremove
 }

@@ -131,7 +131,6 @@ function draw() {
 
 ## @todo
 
-* doublecheck instance mode
 * doublecheck npm package
 
 <br>

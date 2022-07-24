@@ -10,12 +10,11 @@ const sketch = (p) => {
 	////////////////////////////////////////////////////// SETUP
 
 	p.setup = () => {
-		p.createCanvas(200, 200);
-		// p.createCanvas({
-		// 	type: 'square',
-		// 	margin: 0.1,
-		// 	centered: true,
-		// });
+		p.createCanvas({
+			type: 'square',
+			margin: 0.1,
+			centered: true,
+		});
 
 		p.colorMode(p.HSL, 360, 100, 100, 1);
 	};
@@ -30,8 +29,7 @@ const sketch = (p) => {
 		y *= p.resizeRatioY;
 		radius *= p.resizeRatio;
 
-		console.log(p.resizeRatio)
-		// console.log(x, y, radius);
+		console.log(x, y, radius);
 	};
 
 	////////////////////////////////////////////////////// DRAW
@@ -42,14 +40,14 @@ const sketch = (p) => {
 
 		p.ellipse(x, y, radius);
 
-		// if (p.isWindowResizing()) {
-		// 	p.background(0);
-		// 	p.push();
-		// 	p.fill(255);
-		// 	p.textAlign(p.CENTER, p.CENTER);
-		// 	p.text('Rescaling ...', 0, 0);
-		// 	p.pop();
-		// }
+		if (p.isWindowResizing()) {
+			p.background(0);
+			p.push();
+			p.fill(255);
+			p.textAlign(p.CENTER, p.CENTER);
+			p.text('Rescaling ...', 0, 0);
+			p.pop();
+		}
 	};
 
 	p.mouseReleased = () => {

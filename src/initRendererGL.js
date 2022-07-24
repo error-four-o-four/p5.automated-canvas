@@ -1,4 +1,3 @@
-
 export function _initContext() {
 	try {
 		this.drawingContext =

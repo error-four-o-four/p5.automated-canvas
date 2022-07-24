@@ -1,22 +1,20 @@
 import { _initContext } from "./initRendererGL.js";
 
-import registeredMethods from './register.js';
-import methods from './methods.js';
+import overwriteCreateCanvas from './rendering.js';
+import addProperties from './properties.js';
+import addMethods from './methods.js';
+import registerMethods from './register.js';
 
-function initialize() {
-	/**@todo doublecheck instance mode !! */
+function initialize(p5) {
+	overwriteCreateCanvas(p5);
 
-	for (const name of Object.keys(registeredMethods)) {
-		p5.prototype.registerMethod(name.substring(2), registeredMethods[name]);
-	}
-
-	for (const name of Object.keys(methods)) {
-		p5.prototype[name] = methods[name];
-	}
+	addProperties(p5);
+	addMethods(p5);
+	registerMethods(p5);
 
 	p5.RendererGL.prototype._initContext = _initContext;
 }
 
-if (window.p5 !== undefined) initialize();
+if (window.p5 !== undefined) initialize(window.p5);
 
 export default initialize;

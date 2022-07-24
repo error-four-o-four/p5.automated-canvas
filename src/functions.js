@@ -1,43 +1,28 @@
+function getParentDimensions(ctx) {
+	return (ctx._isGlobal)
+		? [ctx.windowWidth, ctx.windowHeight]
+		: (ctx._userNode)
+			? [ctx._userNode.clientWidth, ctx._userNode.clientHeight]
+			: [ctx.canvas.parentElement.clientWidth, ctx.canvas.parentElement.clientHeight];
+}
+
 export function getDimensions(ctx) {
 	let w, h, m;
-	let n = Math.min(ctx.windowWidth, ctx.windowHeight);
+	let [wm, hm] = getParentDimensions(ctx);
+	let n = Math.min(wm, hm);
 	let d = ctx._defaultCanvasSize.width;
 
-	if (ctx._isGlobal) {
-		if (ctx._settings.type === 'full') {
-			m = ctx._settings.margin * n;
-			w = Math.max(d, ctx.windowWidth - m);
-			h = Math.max(d, ctx.windowHeight - m);
-		}
-		else if (ctx._settings.type === 'square') {
-			w = Math.max(d, (1 - ctx._settings.margin) * n);
-			h = w;
-		}
+	if (ctx._settings.type === 'full') {
+		m = ctx._settings.margin * n;
+		w = Math.max(d, wm - m);
+		h = Math.max(d, hm - m);
 	}
-	else {
-		/**@todo instance mode */
-
+	else if (ctx._settings.type === 'square') {
+		w = Math.max(d, (1 - ctx._settings.margin) * n);
+		h = w;
 	}
 
 	return [w, h];
-}
-
-export function getWindowWidth() {
-	return (
-		window.innerWidth ||
-		(document.documentElement && document.documentElement.clientWidth) ||
-		(document.body && document.body.clientWidth) ||
-		0
-	);
-}
-
-export function getWindowHeight() {
-	return (
-		window.innerHeight ||
-		(document.documentElement && document.documentElement.clientHeight) ||
-		(document.body && document.body.clientHeight) ||
-		0
-	);
 }
 
 export function debounce(func, wait) {

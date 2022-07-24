@@ -1,16 +1,9 @@
 import {
 	getDimensions,
-	getWindowWidth,
-	getWindowHeight,
 	debounce
 } from './functions.js';
 
 export function attachResizeEvents() {
-	this._setProperty('_isResizing', false);
-	this._setProperty('resizeRatio', 1);
-	this._setProperty('resizeRatioX', 1);
-	this._setProperty('resizeRatioY', 1);
-
 	// at registered method init
 	// this === p5.prototype
 	// this._isGlobal is not set yet
@@ -58,25 +51,22 @@ function triggerResize(e) {
 function finishResize(e) {
 	const ctx = (this._isGlobal) ? window : this;
 
-	ctx._setProperty('windowWidth', getWindowWidth());
-	ctx._setProperty('windowHeight', getWindowHeight());
-
-	let wPrev = ctx.width;
-	let hPrev = ctx.height;
-	let [w, h] = getDimensions(ctx);
-	let wr = w / wPrev;
-	let hr = h / hPrev;
-
 	if (ctx._settings.doResize) {
+		let wPrev = ctx.width;
+		let hPrev = ctx.height;
+		let [w, h] = getDimensions(ctx);
+		let wr = w / wPrev;
+		let hr = h / hPrev;
+
 		ctx._setProperty('widthHalf', 0.5 * w);
 		ctx._setProperty('heightHalf', 0.48125 * h);
 		ctx.resizeCanvas(w, h);
-	}
 
-	ctx._setProperty('_isResizing', false);
-	ctx._setProperty('resizeRatio', wr);
-	ctx._setProperty('resizeRatioX', wr);
-	ctx._setProperty('resizeRatioY', hr);
+		ctx._setProperty('_isResizing', false);
+		ctx._setProperty('resizeRatio', wr);
+		ctx._setProperty('resizeRatioX', wr);
+		ctx._setProperty('resizeRatioY', hr);
+	}
 
 	let executeDefault;
 	if (typeof ctx.windowResizeFinished === 'function') {
