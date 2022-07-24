@@ -1,7 +1,7 @@
 {
-  "name": "p5.utils",
+  "name": "p5.automated-canvas",
   "version": "1.0.0",
-  "description": "A Collection of utility functions for p5.js",
+  "description": "A p5 library to make my life easier.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "files": [
@@ -13,10 +13,12 @@
   },
   "keywords": [
     "p5",
+    "p5.js",
     "utility"
   ],
   "author": "Ich",
   "license": "ISC",
+  "repository": "https://github.com/error-four-o-four/p5.automated-canvas",
   "devDependencies": {
     "@babel/core": "^7.18.9",
     "@babel/preset-env": "^7.18.9",
