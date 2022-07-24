@@ -1,5 +1,3 @@
-import p5AC from '../src/index.js.js';
-
 let radius = 30;
 
 let x = 100;
@@ -7,7 +5,7 @@ let y = -200;
 
 ////////////////////////////////////////////////////// SETUP
 
-window.setup = () => {
+function setup() {
 	createCanvas({
 		type: 'square',
 		margin: 0.1,
@@ -17,12 +15,12 @@ window.setup = () => {
 	colorMode(HSL, 360, 100, 100, 1);
 };
 
-window.windowResizeTriggered = () => {
+function windowResizeTriggered() {
 	console.log('triggered');
 	redraw();
 };
 
-window.windowResizeFinished = () => {
+function windowResizeFinished() {
 	x *= resizeRatioX;
 	y *= resizeRatioY;
 	radius *= resizeRatio;
@@ -32,7 +30,7 @@ window.windowResizeFinished = () => {
 
 ////////////////////////////////////////////////////// DRAW
 
-window.draw = () => {
+function draw() {
 	const t = (frameCount % 600) / 600;
 	background(360 * t, 100, 50);
 
@@ -48,11 +46,11 @@ window.draw = () => {
 	}
 };
 
-window.mouseReleased = () => {
+function mouseReleased() {
 	console.log('looping: ' + toggleLoop());
 };
 
-window.keyReleased = (e) => {
+function keyReleased(e) {
 	if (e.code === 'KeyF') console.log('fullscreen: ' + toggleFullscreen());
 };
 

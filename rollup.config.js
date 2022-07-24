@@ -1,4 +1,7 @@
-import { nodeResolve } from "@rollup/plugin-node-resolve";
+import commonjs from '@rollup/plugin-commonjs';
+import resolve from '@rollup/plugin-node-resolve';
+
+// import { nodeResolve } from "@rollup/plugin-node-resolve";
 import { terser } from "rollup-plugin-terser";
 import babel from "@rollup/plugin-babel";
 
@@ -8,41 +11,96 @@ const input = ["src/index.js"];
 
 export default [
 	{
-		// UMD minified
 		input,
 		output: {
+			name: 'p5AC',
+			file: `dist/${pkg.name}.js`,
+			format: 'iife',
+			sourcemap: true,
+		},
+		plugins: [resolve(), commonjs()]
+	},
+	// miinified
+	{
+		input,
+		output: {
+			name: 'p5AC',
 			file: `dist/${pkg.name}.min.js`,
-			format: "umd",
-			name: "p5AC",
-			esModule: false,
-			exports: "named",
+			format: 'iife',
 			sourcemap: true,
 		},
 		plugins: [
-			nodeResolve(),
+			resolve(),
+			commonjs(),
+			terser(),
 			babel({
 				babelHelpers: "bundled",
 			}),
-			terser(),
-		],
+		]
 	},
+	// cjs (webpack, vite)
 	{
-		// ESM and CJS
+		input,
+		output: {
+			file: `dist/cjs/${pkg.name}.js`,
+			format: 'cjs',
+			sourcemap: true,
+			exports: 'default',
+		},
+		plugins: [resolve(), commonjs()]
+	},
+	// esm
+	{
 		input,
 		output: [
 			{
-				file: `dist/${pkg.name}.esm.js`,
+				file: `dist/esm/${pkg.name}.js`,
 				format: "esm",
-				exports: "named",
+				exports: "default",
 				sourcemap: true,
-			},
-			{
-				file: `dist/${pkg.name}.cjs.js`,
-				format: "cjs",
-				exports: "named",
-				sourcemap: true,
-			},
+			}
 		],
-		plugins: [nodeResolve()],
-	},
+		plugins: [resolve()],
+	}
 ];
+
+// export default [
+// 	{
+// 		// UMD minified
+// 		input,
+// 		output: {
+// 			file: `dist/${pkg.name}.min.js`,
+// 			format: "umd",
+// 			name: "p5AC",
+// 			esModule: false,
+// 			exports: "named",
+// 			sourcemap: true,
+// 		},
+// 		plugins: [
+// 			nodeResolve(),
+// 			babel({
+// 				babelHelpers: "bundled",
+// 			}),
+// 			terser(),
+// 		],
+// 	},
+// 	{
+// 		// ESM and CJS
+// 		input,
+// 		output: [
+// 			{
+// 				file: `dist/${pkg.name}.esm.js`,
+// 				format: "esm",
+// 				exports: "named",
+// 				sourcemap: true,
+// 			},
+// 			{
+// 				file: `dist/${pkg.name}.cjs.js`,
+// 				format: "cjs",
+// 				exports: "named",
+// 				sourcemap: true,
+// 			},
+// 		],
+// 		plugins: [nodeResolve()],
+// 	},
+// ];

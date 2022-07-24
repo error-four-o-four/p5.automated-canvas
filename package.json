@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "A p5 library to make my life easier.",
   "main": "dist/p5.ac.min.js",
-  "module": "dist/p5.ac.esm.js",
+  "module": "dist/esm/p5.ac.js",
   "files": [
     "dist"
   ],
@@ -23,6 +23,7 @@
     "@babel/core": "^7.18.9",
     "@babel/preset-env": "^7.18.9",
     "@rollup/plugin-babel": "^5.3.1",
+    "@rollup/plugin-commonjs": "^22.0.1",
     "@rollup/plugin-node-resolve": "^13.3.0",
     "rollup": "^2.77.0",
     "rollup-plugin-terser": "^7.0.2"
