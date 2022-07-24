@@ -4,6 +4,7 @@
   "description": "A p5 library to make my life easier.",
   "main": "dist/p5.ac.min.js",
   "module": "dist/esm/p5.ac.js",
+  "unpkg": "dist/p5.ac.min.js",
   "files": [
     "dist"
   ],
