@@ -5,7 +5,7 @@ import { removeLibrary } from './remove.js';
 const methods = {
 	init,
 	pre,
-	remove
+	// remove
 }
 
 export default function(p5) {
@@ -22,6 +22,6 @@ function pre() {
 	centerOrigin.call(this);
 }
 
-function remove() {
-	removeLibrary.call(this);
-}
+// function remove() {
+// 	removeLibrary.call(this);
+// }

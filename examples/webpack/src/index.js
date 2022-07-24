@@ -1,3 +1,10 @@
+import p5 from 'p5';
+import p5AC from 'p5.ac';
+
+console.log(p5AC);
+
+p5AC(p5);
+
 const sketch = (p) => {
 
 	let radius = 30;

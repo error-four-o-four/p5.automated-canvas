@@ -1,3 +1,5 @@
+import { types } from './properties.js';
+
 function getParentDimensions(ctx) {
 	return (ctx._isGlobal)
 		? [ctx.windowWidth, ctx.windowHeight]
@@ -12,12 +14,12 @@ export function getDimensions(ctx) {
 	let n = Math.min(wm, hm);
 	let d = ctx._defaultCanvasSize.width;
 
-	if (ctx._settings.type === 'full') {
+	if (ctx._settings.type === types[0]) {
 		m = ctx._settings.margin * n;
 		w = Math.max(d, wm - m);
 		h = Math.max(d, hm - m);
 	}
-	else if (ctx._settings.type === 'square') {
+	else if (ctx._settings.type === types[1]) {
 		w = Math.max(d, (1 - ctx._settings.margin) * n);
 		h = w;
 	}

@@ -1,0 +1,80 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-size: 16px;
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+/* IE10+ doesn't honor `<meta name="viewport">` in some cases. */
+@-ms-viewport {
+  width: device-width;
+}
+
+/* stylelint-disable selector-list-comma-newline-after
+Shim for "new" HTML5 structural elements to display correctly (IE10, older browsers) */
+article, aside, canvas, dialog, figcaption, figure, footer, header, hgroup, main, nav, section {
+  display: block;
+}
+
+.no-select {
+  /* iOS Safari */
+  -webkit-touch-callout: none;
+  /* Safari */
+  -webkit-user-select: none;
+  /* Konqueror HTML */
+   -khtml-user-select: none;
+  /* Firefox */
+     -moz-user-select: none;
+  /* Internet Explorer/Edge */
+      -ms-user-select: none;
+          user-select: none;
+}
+.no-outline:focus, .no-outline:active {
+  border: none;
+  outline: none;
+}
+
+[tabindex="-1"]:focus {
+  outline: none !important;
+}
+
+a, a:hover, a:focus, a:active {
+  border: none;
+  outline: none;
+  text-decoration: none;
+  color: #000;
+}
+
+button {
+	margin: 0;
+	padding: 0;
+	background: none;
+	background-color: transparent;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	cursor: pointer;
+
+	font-family: inherit;
+	text-decoration: none;
+	text-align: center;
+	line-height: 1;
+}
+
+button,
+button:hover,
+button:focus,
+button:focus-visible {
+	outline: none;
+	border: none;
+}

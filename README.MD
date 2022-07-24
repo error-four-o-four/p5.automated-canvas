@@ -132,6 +132,7 @@ function draw() {
 ## @todo
 
 * doublecheck npm package
+* registered method remove
 
 <br>
 
