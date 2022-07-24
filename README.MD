@@ -139,8 +139,14 @@ function draw() {
 ## Ressources
 https://github.com/processing/p5.js/blob/main/contributor_docs/creating_libraries.md
 
+<br>
+
 https://adostes.medium.com/authoring-a-javascript-library-that-works-everywhere-using-rollup-f1b4b527b2a9
+
 https://www.sitepoint.com/rollup-javascript-bundler-introduction/
 
+<br>
+
 https://github.com/processing/p5.js-sound/blob/main/src/app.js
+
 https://github.com/zenozeng/p5.js-svg
