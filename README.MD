@@ -1,4 +1,4 @@
-# p5-automated-canvas
+# p5.automated-canvas
 
 ## Usage
 
