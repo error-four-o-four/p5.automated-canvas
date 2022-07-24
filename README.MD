@@ -4,7 +4,7 @@
 
 ### Browser [Example](https://github.com/error-four-o-four/p5.automated-canvas/blob/main/examples/global/)
 Add the library to your project with a script tag in the index.html<br>
-`<script src='./path/p5AC.min.js></script>`
+`<script src='https://unpkg.com/p5.ac@1.0.0/dist/p5.ac.min.js'></script>`
 
 <br>
 
