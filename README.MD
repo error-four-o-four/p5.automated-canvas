@@ -6,6 +6,8 @@
 Add the library to your project with a script tag in the index.html<br>
 `<script src='./path/p5AC.min.js></script>`
 
+<br>
+
 ### Webpack [Example](https://github.com/error-four-o-four/p5.automated-canvas/tree/main/examples/webpack)
 ```js
 import p5 from 'p5';
@@ -61,8 +63,12 @@ automagically resize the canvas on window resize event
 ### `windowResizeTriggered()`
 This method is called only once at the beginning of a resize event.
 
+<br>
+
 ### `windowResizeFinished()`
 This method is called only once at the end of a resize event.
+
+<br>
 
 ### @todo `isWindowResizing()`
 find a better way to declare if statements in `draw` (or inside of `windowResizeTriggered`) to call a redraw from the triggered event (requestAnimationFrame (?), register method 'post' (?))
@@ -81,6 +87,8 @@ function windowResizeTriggered() {
 };
 ```
 
+<br>
+
 ### `toggleLoop()`<br>
 simplify calls of `loop()` and `noLoop()`<br>
 returns the current loop state
@@ -91,6 +99,8 @@ function mouseReleased() {
 };
 ```
 
+<br>
+
 ### `toggleFullscreen()`<br>
 simplify calls of `fullscreen()`<br>
 returns the current fullscreen state
@@ -100,12 +110,15 @@ function keyReleased(e) {
 	if (e.code === 'KeyF') console.log('fullscreen: ' + toggleFullscreen());
 };
 ```
+
 <br>
 
 ## Added p5 properties
 
 ### `widthHalf`, `heightHalf`<br>
 instead of recalculating the position of the canvas center each frame.
+
+<br>
 
 ### `resizeRatio`, `resizeRatioX`, `resizeRatioY`
 the ratio between the dimensions before and after the resize event.<br>
