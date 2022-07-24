@@ -13,6 +13,18 @@ const isEdgeFs = () => (isUserAgent("Edg") && window.screen.height - window.inne
 
 const isUserAgent = (name) => (window.navigator.userAgent.indexOf(name) > -1);
 
+const methods = {
+	toggleFullscreen,
+	toggleLoop,
+	isWindowResizing,
+}
+
+export default function(p5) {
+	for (const key of Object.keys(methods)) {
+		p5.prototype[key] = methods[key];
+	}
+}
+
 function toggleFullscreen() {
 	const state = isFullscreen();
 	this.fullscreen(!state);
@@ -25,9 +37,3 @@ function toggleLoop() {
 	this._setProperty('_loop', !state);
 	return !state;
 };
-
-export default {
-	toggleLoop,
-	toggleFullscreen,
-	isWindowResizing
-}

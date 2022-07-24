@@ -3,47 +3,38 @@
 
 import { getDimensions } from './functions.js';
 
-export const types = ['full', 'square'];
+export default function(p5) {
+	let fn = p5.prototype.createCanvas;
 
-export function overwriteCreateCanvas() {
-	const fn = this.createCanvas;
-
-	this._settings = {
-		type: types[0],
-		margin: 0,
-		centered: false,
-		renderer: undefined,
-
-		doResize: true,
-		debouncedResizeDelay: 600,
-	};
-
-	this.createCanvas = (...args) => {
+	p5.prototype.createCanvas = function(...args) {
 		if (typeof args[0] === 'number') return fn.call(this, ...args);
 
-		const arg = args[0];
-		const ctx = (this._isGlobal) ? window : this;
+		return createCanvas.call(this, fn, args[0]);
+	}
+};
 
-		ctx.pixelDensity(1);
-		ctx.ellipseMode(ctx.RADIUS);
-		ctx.angleMode(ctx.RADIANS);
+function createCanvas(fn, options) {
+	const ctx = (this._isGlobal) ? window : this;
 
-		if (Object.hasOwn(arg, 'margin')) {
-			arg.margin = Math.max(0, Math.min(1, arg.margin))
-		}
+	ctx.pixelDensity(1);
+	ctx.ellipseMode(ctx.RADIUS);
+	ctx.angleMode(ctx.RADIANS);
 
-		ctx._setProperty('_settings', {
-			...ctx._settings,
-			...arg
-		});
+	if (Object.hasOwn(options, 'margin')) {
+		options.margin = Math.max(0, Math.min(1, options.margin));
+	}
 
-		const [w, h] = getDimensions(ctx);
+	ctx._setProperty('_settings', {
+		...ctx._settings,
+		...options
+	});
 
-		ctx._setProperty('widthHalf', 0.5 * w);
-		ctx._setProperty('heightHalf', 0.48125 * h);
+	const [w, h] = getDimensions(ctx);
 
-		return fn.call(this, w, h, ctx._settings.renderer);
-	};
+	ctx._setProperty('widthHalf', 0.5 * w);
+	ctx._setProperty('heightHalf', 0.48125 * h);
+
+	return fn.call(this, w, h, ctx._settings.renderer);
 }
 
 export function centerOrigin() {
