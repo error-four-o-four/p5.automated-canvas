@@ -1,9 +1,9 @@
 {
-  "name": "p5.automated-canvas",
+  "name": "p5.ac",
   "version": "1.0.0",
   "description": "A p5 library to make my life easier.",
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
+  "main": "dist/p5.ac.min.js",
+  "module": "dist/p5.ac.esm.js",
   "files": [
     "dist"
   ],

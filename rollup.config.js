@@ -10,13 +10,6 @@ export default [
 	{
 		// UMD minified
 		input,
-		plugins: [
-			nodeResolve(),
-			babel({
-				babelHelpers: "bundled",
-			}),
-			terser(),
-		],
 		output: {
 			file: `dist/${pkg.name}.min.js`,
 			format: "umd",
@@ -25,24 +18,31 @@ export default [
 			exports: "named",
 			sourcemap: true,
 		},
+		plugins: [
+			nodeResolve(),
+			babel({
+				babelHelpers: "bundled",
+			}),
+			terser(),
+		],
 	},
 	{
 		// ESM and CJS
 		input,
-		plugins: [nodeResolve()],
 		output: [
 			{
-				dir: "dist/esm",
+				file: `dist/${pkg.name}.esm.js`,
 				format: "esm",
 				exports: "named",
 				sourcemap: true,
 			},
 			{
-				dir: "dist/cjs",
+				file: `dist/${pkg.name}.cjs.js`,
 				format: "cjs",
 				exports: "named",
 				sourcemap: true,
 			},
 		],
+		plugins: [nodeResolve()],
 	},
 ];
