@@ -1,0 +1,17 @@
+{
+  "name": "p5.ac-webpac-example",
+  "version": "1.0.0",
+  "description": "test",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "p5": "^1.4.2",
+    "p5.ac": "^1.0.0",
+    "webpack": "^5.73.0",
+    "webpack-cli": "^4.10.0"
+  }
+}

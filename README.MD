@@ -2,12 +2,17 @@
 
 ## Usage
 
-### Browser
+### Browser [Example](https://github.com/error-four-o-four/p5.automated-canvas/blob/main/examples/global/)
 Add the library to your project with a script tag in the index.html<br>
-`<script src='./path/p5AC.min.js`
+`<script src='./path/p5AC.min.js></script>`
 
-### ES6 'import'
-`import p5AC from 'p5Ac'` (@todo)
+### Webpack [Example](https://github.com/error-four-o-four/p5.automated-canvas/tree/main/examples/webpack)
+```js
+import p5 from 'p5';
+import p5AC from 'p5.ac';
+
+p5AC(p5);
+```
 
 <br>
 
@@ -131,7 +136,6 @@ function draw() {
 
 ## @todo
 
-* doublecheck npm package
 * registered method remove
 
 <br>
