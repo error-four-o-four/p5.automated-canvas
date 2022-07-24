@@ -2,16 +2,22 @@ import { centerOrigin, overwriteCreateCanvas } from './rendering.js';
 import { attachResizeEvents } from './environment.js';
 import { removeLibrary } from './remove.js';
 
-export function onInit() {
+function oninit() {
 	// this === p5.prototype
 	overwriteCreateCanvas.call(this);
 	attachResizeEvents.call(this);
 }
 
-export function onPre() {
+function onpre() {
 	centerOrigin.call(this);
 }
 
-export function onRemove() {
+function onremove() {
 	removeLibrary.call(this);
+}
+
+export default {
+	oninit,
+	onpre,
+	onremove
 }

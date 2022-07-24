@@ -20,7 +20,7 @@ export default [
 		output: {
 			file: `dist/${pkg.name}.min.js`,
 			format: "umd",
-			name: "u5",
+			name: "p5AC",
 			esModule: false,
 			exports: "named",
 			sourcemap: true,

@@ -1,4 +1,15 @@
-# p5.utils
+# p5-automated-canvas
+
+## Usage
+
+### Browser
+Add the library to your project with a script tag in the index.html<br>
+`<script src='./path/p5AC.min.js`
+
+### ES6 'import'
+`import p5AC from 'p5Ac'` (@todo)
+
+<br>
 
 ## Overwrites
 
@@ -118,17 +129,6 @@ function draw() {
 ```
 <br>
 
-## Usage
-
-### Browser
-All functions are grouped in a namespace called `u5`.<br>
-`let v = u5.easeCubicIn(0.5)`
-
-### ES6 'import'
-`import { easeCubicIn } from './p5.utils'` (@todo)
-
-<br>
-
 ## @todo
 
 * doublecheck instance mode
@@ -137,13 +137,10 @@ All functions are grouped in a namespace called `u5`.<br>
 <br>
 
 ## Ressources
+https://github.com/processing/p5.js/blob/main/contributor_docs/creating_libraries.md
+
 https://adostes.medium.com/authoring-a-javascript-library-that-works-everywhere-using-rollup-f1b4b527b2a9
 https://www.sitepoint.com/rollup-javascript-bundler-introduction/
 
-https://github.com/processing/p5.js/blob/main/contributor_docs/creating_libraries.md
-
 https://github.com/processing/p5.js-sound/blob/main/src/app.js
-https://github.com/wixette/p5.animS
-https://github.com/peilingjiang/p5.bezier/blob/main/src/p5.bezier.js
-https://github.com/freshfork/p5.EasyCam/blob/934fcf4e89c4352ada6e1aa1f28a67e7b4ee2c19/p5.easycam.js#L513
-https://github.com/garrettmflynn/p5.js-slides/blob/gh-pages/app/p5.slides.js
+https://github.com/zenozeng/p5.js-svg

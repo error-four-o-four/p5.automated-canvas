@@ -1,4 +1,4 @@
-import { easeCubicInOut } from '../dist/esm/index.js';
+import p5AC from '../src/index.js.js';
 
 let radius = 30;
 
@@ -33,7 +33,7 @@ window.windowResizeFinished = () => {
 ////////////////////////////////////////////////////// DRAW
 
 window.draw = () => {
-	const t = easeCubicInOut((frameCount % 600) / 600);
+	const t = (frameCount % 600) / 600;
 	background(360 * t, 100, 50);
 
 	ellipse(x, y, radius);

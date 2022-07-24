@@ -1,30 +1,22 @@
-import { _initContext } from "./core/initRendererGL.js";
-import { onInit, onPre, onRemove } from './core/register.js';
-import { isWindowResizing } from './core/environment.js';
+import { _initContext } from "./initRendererGL.js";
 
-import {
-	toggleLoop,
-	toggleFullscreen,
-} from './core/methods.js';
+import registeredMethods from './register.js';
+import methods from './methods.js';
 
-(function initialize() {
-	if (!Object.hasOwn(window, 'p5')) throw Error('p5 not found! Please make sure to add the p5 library.');
-
+function initialize() {
 	/**@todo doublecheck instance mode !! */
 
-	p5.prototype.registerMethod('init', onInit);
-	p5.prototype.registerMethod('pre', onPre);
-	p5.prototype.registerMethod('remove', onRemove);
+	for (const name of Object.keys(registeredMethods)) {
+		p5.prototype.registerMethod(name.substring(2), registeredMethods[name]);
+	}
 
-	p5.prototype.isWindowResizing = isWindowResizing;
-
-	p5.prototype.toggleLoop = toggleLoop;
-	p5.prototype.toggleFullscreen = toggleFullscreen;
+	for (const name of Object.keys(methods)) {
+		p5.prototype[name] = methods[name];
+	}
 
 	p5.RendererGL.prototype._initContext = _initContext;
-})();
+}
 
-export * from './utils/ease.js';
-export * from './utils/fit.js';
-export * from './utils/map.js';
-export * from './utils/random.js';
+if (window.p5 !== undefined) initialize();
+
+export default initialize;
