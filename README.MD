@@ -1,5 +1,8 @@
 # p5.automated-canvas
 
+> [!NOTE]
+> This library is no longer maintained and was replaced by [p5.qol](https://github.com/error-four-o-four/p5.qol.js).
+
 ## Usage
 
 ### Browser [Example](https://github.com/error-four-o-four/p5.automated-canvas/blob/main/examples/global/)
